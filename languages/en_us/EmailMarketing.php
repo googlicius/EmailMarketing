@@ -1,0 +1,23 @@
+<?php
+$languageStrings = array(
+	'LBL_EMAILMARKETING_INFORMATION' => 'Email Marketing Information',
+	'LBL_SUBJECT' => 'Subject',
+	'LBL_EMAILMARKETING_NO' => 'Email Marketing No',
+	'LBL_EMAILMARKETING_CAMPAIGN' => 'Campaign',
+	'LBL_TEMPLTE' => 'Template',
+	'LBL_EMAILMARKETING_STATUS' => 'Email Status',
+	'EMAILMARKETING_CREATED' => 'Created',
+	'EMAILMARKETING_SENDING' => 'Sending',
+	'EMAILMARKETING_DONE' => 'Done',
+	'EMAILMARKETING_CANCELED' => 'Canceled',
+	'LBL_SOURCE' => 'Source',
+	'SRC_LEAD' => 'Lead',
+	'SRC_CONTACT' => 'Contact',
+	'SRC_ORGANIZATION' => 'Organization',
+	'LBL_EMAILMARKETING_CONTENT_INFORMATION' => 'Email Content Information',
+	'LBL_TOTAL_EMAILS' => 'Total Emails',
+	'LBL_SENT' => 'Sents',
+	'LBL_ERRORS' => 'Errors',
+	'SINGLE_EmailMarketing' => 'Email Marketing',
+	'LBL_EMAILMARKETING_CATEGORY' => 'Category',
+);

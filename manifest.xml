@@ -1,0 +1,522 @@
+<?xml version='1.0'?>
+<module>
+    <exporttime>2015-10-05 00:00:00</exporttime>
+	<name>EmailMarketing</name>
+	<label>Email Marketing</label>
+	<parent>Marketing</parent>
+    <version>1.0</version>
+	<author>Haidang009@gmail.com</author>
+    <dependencies>
+		<vtiger_version>6.1.0</vtiger_version>
+		<vtiger_max_version>6.*</vtiger_max_version>
+    </dependencies>
+    <tables>
+       <table>
+			<name>vtiger_emailmarketing</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_emailmarketing` (
+			  `emailmarketingid` int(19) NOT NULL,
+			  `emailmarketing_no` varchar(100) NOT NULL,
+			  `subject` varchar(200) NOT NULL,
+			  `campaign_id` varchar(20) default NULL,
+			  `emailmarketing_status` varchar(50) default NULL,
+			  `emailmarketing_source` varchar(50) default NULL,
+			  `total_emails` varchar(50) default NULL,
+			  `emailmarketing_category` varchar(100) default NULL,
+			  `sent` varchar(50) default NULL,
+			  `errors` varchar(50) default NULL,
+			  `limit_loadmore` varchar(19) default NULL,
+			  `template` text,
+			  PRIMARY KEY  (`emailmarketingid`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+            <name>vtiger_emailmarketingcf</name>
+            <sql><![CDATA[CREATE TABLE `vtiger_emailmarketingcf` (
+				  `emailmarketingid` int(19) NOT NULL,
+				  PRIMARY KEY  (`emailmarketingid`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8]]>
+            </sql>
+        </table>
+		<table>
+            <name>vtiger_emailmarketing_list</name>
+            <sql><![CDATA[CREATE TABLE `vtiger_emailmarketing_list` (
+				  `ID` int(19) AUTO_INCREMENT NOT NULL,
+				  `emailmarketingid` int(19) NOT NULL,
+				  `parentid` int(19) NOT NULL,
+				  `emailmarketing_status` varchar(20) default NULL,
+				  `detail` text default NULL,
+				  `emailid` int(19) default NULL,
+				  PRIMARY KEY  (`ID`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8]]>
+            </sql>
+        </table>
+    </tables>
+    <blocks>
+        <block>
+            <label>LBL_EMAILMARKETING_INFORMATION</label>
+            <fields>
+				<field>
+					<fieldname>emailmarketing_no</fieldname>
+					<uitype>4</uitype>
+					<columnname>emailmarketing_no</columnname>
+					<tablename>vtiger_emailmarketing</tablename>
+					<generatedtype>1</generatedtype>
+					<fieldlabel>LBL_EMAILMARKETING_NO</fieldlabel>
+					<readonly>1</readonly>
+					<presence>2</presence>
+					<selected>0</selected>
+					<sequence>2</sequence>
+					<maximumlength>100</maximumlength>
+					<typeofdata>V~M</typeofdata>
+					<quickcreate>1</quickcreate>
+					<quickcreatesequence></quickcreatesequence>
+					<displaytype>1</displaytype>
+					<info_type>BAS</info_type>
+					<helpinfo><![CDATA[]]></helpinfo>
+					<masseditable>0</masseditable>
+					<summaryfield>1</summaryfield>
+					<entityidentifier>
+						<entityidfield>emailmarketingid</entityidfield>
+						<entityidcolumn>emailmarketingid</entityidcolumn>
+					</entityidentifier>
+				</field>
+				<field>
+                    <fieldname>campaign_id</fieldname>
+                    <uitype>10</uitype>
+                    <columnname>campaign_id</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_EMAILMARKETING_CAMPAIGN</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <defaultvalue></defaultvalue>
+                    <sequence>6</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~O</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>0</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+					<relatedmodules>
+						<relatedmodule>Campaigns</relatedmodule>
+					</relatedmodules>
+                </field>
+				<field>
+                    <fieldname>emailmarketing_status</fieldname>
+                    <uitype>15</uitype>
+                    <columnname>emailmarketing_status</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_EMAILMARKETING_STATUS</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>2</presence>
+                    <defaultvalue>EMAILMARKETING_CREATED</defaultvalue>
+                    <sequence>16</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~M</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+					<summaryfield>1</summaryfield>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                    <picklistvalues>
+						<picklistvalue>EMAILMARKETING_CREATED</picklistvalue>
+						<picklistvalue>EMAILMARKETING_SENDING</picklistvalue>
+						<picklistvalue>EMAILMARKETING_DONE</picklistvalue>
+						<picklistvalue>EMAILMARKETING_CANCELED</picklistvalue>
+					</picklistvalues>
+                </field>
+				<field>
+                    <fieldname>emailmarketing_category</fieldname>
+                    <uitype>15</uitype>
+                    <columnname>emailmarketing_category</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_EMAILMARKETING_CATEGORY</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>2</presence>
+                    <defaultvalue></defaultvalue>
+                    <sequence>16</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~O</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+					<summaryfield>1</summaryfield>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                    <picklistvalues>
+						<picklistvalue>Sample Category</picklistvalue>
+					</picklistvalues>
+                </field>
+				<field>
+                    <fieldname>emailmarketing_source</fieldname>
+                    <uitype>15</uitype>
+                    <columnname>emailmarketing_source</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_SOURCE</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>2</presence>
+                    <defaultvalue></defaultvalue>
+                    <sequence>16</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~M</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+					<summaryfield>1</summaryfield>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                    <picklistvalues>
+						<picklistvalue>SRC_LEAD</picklistvalue>
+						<picklistvalue>SRC_CONTACT</picklistvalue>
+						<picklistvalue>SRC_ORGANIZATION</picklistvalue>
+					</picklistvalues>
+                </field>
+				<field>
+                    <fieldname>total_emails</fieldname>
+                    <uitype>1</uitype>
+                    <columnname>total_emails</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_TOTAL_EMAILS</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <defaultvalue>0</defaultvalue>
+                    <sequence>10</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>N~O</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>0</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                </field>
+				<field>
+                    <fieldname>sent</fieldname>
+                    <uitype>1</uitype>
+                    <columnname>sent</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_SENT</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <defaultvalue>0</defaultvalue>
+                    <sequence>10</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>N~O</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>0</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                </field>
+				<field>
+                    <fieldname>errors</fieldname>
+                    <uitype>1</uitype>
+                    <columnname>errors</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_ERRORS</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <defaultvalue>0</defaultvalue>
+                    <sequence>10</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>N~O</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>0</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                </field>
+				<field>
+                    <fieldname>limit_loadmore</fieldname>
+                    <uitype>1</uitype>
+                    <columnname>limit_loadmore</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_LIMIT_LOADMORE</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <defaultvalue>0</defaultvalue>
+                    <sequence>10</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>N~V</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>0</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                </field>
+				<field>
+                    <fieldname>assigned_user_id</fieldname>
+                    <uitype>53</uitype>
+                    <columnname>smownerid</columnname>
+                    <tablename>vtiger_crmentity</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>Assigned To</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <selected>0</selected>
+                    <sequence>50</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~O</typeofdata>
+                    <quickcreate>1</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]></helpinfo>
+                    <masseditable>0</masseditable>
+                </field>
+				<field>
+                    <fieldname>createdtime</fieldname>
+                    <uitype>70</uitype>
+                    <columnname>createdtime</columnname>
+                    <tablename>vtiger_crmentity</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>Created Time</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <selected>0</selected>
+                    <sequence>51</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>DT~O</typeofdata>
+                    <quickcreate>1</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>2</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]></helpinfo>
+                    <masseditable>0</masseditable>
+                </field>
+                <field>
+                    <fieldname>modifiedtime</fieldname>
+                    <uitype>70</uitype>
+                    <columnname>modifiedtime</columnname>
+                    <tablename>vtiger_crmentity</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>Modified Time</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <selected>0</selected>
+                    <sequence>52</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>DT~O</typeofdata>
+                    <quickcreate>1</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>2</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]></helpinfo>
+                    <masseditable>0</masseditable>
+                </field>
+            </fields>
+        </block>
+		<block>
+			<label>LBL_EMAILMARKETING_CONTENT_INFORMATION</label>
+			<fields>
+				<field>
+                    <fieldname>subject</fieldname>
+                    <uitype>1</uitype>
+                    <columnname>subject</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_SUBJECT</fieldlabel>
+                    <readonly>0</readonly>
+                    <presence>0</presence>
+                    <defaultvalue></defaultvalue>
+                    <sequence>2</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~M</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>7</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+					<summaryfield>1</summaryfield>
+                </field>
+				<field>
+                    <fieldname>template</fieldname>
+                    <uitype>19</uitype>
+                    <columnname>template</columnname>
+                    <tablename>vtiger_emailmarketing</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>LBL_TEMPLTE</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>0</presence>
+                    <defaultvalue></defaultvalue>
+                    <sequence>6</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~O</typeofdata>
+                    <quickcreate>0</quickcreate>
+                    <quickcreatesequence>0</quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                </field>
+			</fields>
+		</block>
+        <block>
+            <label>LBL_DESCRIPTION_INFORMATION</label>
+            <fields>
+                <field>
+                    <fieldname>description</fieldname>
+                    <uitype>19</uitype>
+                    <columnname>description</columnname>
+                    <tablename>vtiger_crmentity</tablename>
+                    <generatedtype>1</generatedtype>
+                    <fieldlabel>Notes</fieldlabel>
+                    <readonly>1</readonly>
+                    <presence>2</presence>
+                    <defaultvalue></defaultvalue>
+                    <sequence>1</sequence>
+                    <maximumlength>100</maximumlength>
+                    <typeofdata>V~O</typeofdata>
+                    <quickcreate>1</quickcreate>
+                    <quickcreatesequence></quickcreatesequence>
+                    <displaytype>1</displaytype>
+                    <info_type>BAS</info_type>
+                    <helpinfo><![CDATA[]]>
+                    </helpinfo>
+                    <masseditable>1</masseditable>
+                </field>
+            </fields>
+        </block>
+    </blocks>
+    <customviews>
+        <customview>
+            <viewname>All</viewname>
+            <setdefault>true</setdefault>
+            <setmetrics>false</setmetrics>
+            <fields>				
+                <field>
+                    <fieldname>subject</fieldname>
+                    <columnindex>1</columnindex>
+                </field>				
+				<field>
+                    <fieldname>campaign_id</fieldname>
+                    <columnindex>2</columnindex>
+                </field>
+				<field>
+                    <fieldname>emailmarketing_source</fieldname>
+                    <columnindex>3</columnindex>
+                </field>
+				<field>
+                    <fieldname>emailmarketing_status</fieldname>
+                    <columnindex>4</columnindex>
+                </field><field>
+                    <fieldname>emailmarketing_category</fieldname>
+                    <columnindex>5</columnindex>
+                </field>
+				<field>
+                    <fieldname>total_emails</fieldname>
+                    <columnindex>6</columnindex>
+                </field>
+				<field>
+                    <fieldname>sent</fieldname>
+                    <columnindex>7</columnindex>
+                </field>
+				<field>
+                    <fieldname>errors</fieldname>
+                    <columnindex>8</columnindex>
+                </field>			
+            </fields>
+        </customview>
+    </customviews>
+    <sharingaccess>
+        <default>private</default>
+    </sharingaccess>
+    <actions>
+        <action>
+            <name><![CDATA[Import]]>
+            </name>
+            <status>enabled</status>
+        </action>
+        <action>
+            <name><![CDATA[Export]]>
+            </name>
+            <status>enabled</status>
+        </action>
+        <action>
+            <name><![CDATA[DuplicatesHandling]]>
+            </name>
+            <status>enabled</status>
+        </action>
+    </actions>	
+	<license>
+        <inline><![CDATA[  ********************************************************************************
+	 * The contents of these file is are subject to GPL 2.
+	 ********************************************************************************
+	 *  Module       : EmailMarketing
+	 *  Version      : 1.0
+	 *  Vtiger       : 6.1.0
+	 *  Author       : Nguyen-Hai-Dang - haidang009@gmail.com
+	 ********************************************************************************
+	  
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	1. After install, add code below to line 202 before send email
+	[CODE]
+	if($request->get('campaign_id') != null){
+		$recordModel->set('campaign_id',$request->get('campaign_id'));
+	}
+	[/CODE]
+	
+	2. Add lines below to modules/Emails/views/MassAjaxSave.php in function massSave() line 211
+	[CODE]
+	/* Added by haidang009 : update vtiger_emailmarketing_list, number of sent/errors */
+	if($request->get('send_from_emailmarketing') == 'true'){
+		$current_entity_id = $adb->getUniqueID("vtiger_crmentity");
+		$current_email_id = $current_entity_id-1;
+		$parentid = $request->get('parentid');
+		$emailmarketingid = $request->get('emailmarketingid');
+		if ($success){
+			$update_field = 'sent';
+			$params = array('Sent', '', $current_email_id, $parentid, $emailmarketingid);
+		}else{
+			$update_field = 'errors';
+			$params = array('Error', $message, null, $parentid, $emailmarketingid);
+		}
+
+		$sql = "UPDATE `vtiger_emailmarketing_list` SET `emailmarketing_status` = ?, `detail` = ?, `emailid` = ? WHERE `parentid` = ? AND `emailmarketingid`=?";
+		$adb->pquery($sql,$params);
+
+		//Update sent/errors number
+		$current_emailmarketing = $adb->pquery("SELECT * FROM `vtiger_emailmarketing` WHERE emailmarketingid = ?",array($emailmarketingid));
+		$update_field_value = $adb->query_result($current_emailmarketing,0,$update_field);
+		$adb->pquery("UPDATE `vtiger_emailmarketing` SET $update_field = ? WHERE emailmarketingid = ?",array($update_field_value+1,$emailmarketingid));
+		
+		
+		// Clear entiry description
+		$adb->pquery("UPDATE `vtiger_crmentity` SET `description` = 'Email này được gửi từ Email Marketing, nội dung email đã bị xóa' WHERE crmid = ?",array($current_email_id));
+
+	}
+	/* End added */
+	[/CODE]
+	
+	
+	
+ ]]></inline>
+    </license>
+</module>
